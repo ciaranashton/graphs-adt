@@ -1,16 +1,24 @@
-interface GraphNode {
-    key: string;
-    neighbours: GraphNode[];
-    addNeighbour: Function;
-}
-
 interface Result {
     distance: number;
     previous: string | null;
 }
 
+class Node {
+    public key: string;
+    public neighbours: Node[];
+
+    constructor(key: string) {
+        this.key = key;
+        this.neighbours = [];
+    }
+
+    public addNeighbour(node: Node) {
+        this.neighbours.push(node);
+    }
+}
+
 export class Graph {
-    private nodes: GraphNode[];
+    private nodes: Node[];
     private edges: Map<string, number>;
 
     constructor() {
@@ -18,23 +26,11 @@ export class Graph {
         this.edges = new Map();
     }
 
-    private createNode(key: string): GraphNode {
-        const neighbours: GraphNode[] = [];
-
-        return {
-            key,
-            neighbours,
-            addNeighbour(node: GraphNode) {
-                neighbours.push(node);
-            },
-        };
-    }
-
     public addNode(key: string): void {
-        this.nodes.push(this.createNode(key));
+        this.nodes.push(new Node(key));
     }
 
-    public getNode(key: string): GraphNode {
+    public getNode(key: string): Node {
         const node = this.nodes.find(node => node.key === key);
         if (!node) {
             throw new Error(`Could not find source node ${key}`);
@@ -130,14 +126,16 @@ export class Graph {
         }
         const results = this.dijkstra(source);
 
-        function buildRoute(key: string, route: string[]): string[] {
+        function buildRoute(
+            key: string,
+            route: string[] = [],
+        ): string[] {
             const { previous } = results[key];
             return previous === null
                 ? [key, ...route]
                 : buildRoute(previous, [key, ...route]);
         }
 
-        return buildRoute(destination, []);
+        return buildRoute(destination);
     }
 }
-

@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "lib": ["ES6", "es2017"],
+        "lib": ["dom", "ES2016", "ES2017", "ES2018", "ESNext"],
         "outDir": "lib",
         "declaration": true,
         "declarationMap": true,
