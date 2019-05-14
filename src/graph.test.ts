@@ -16,7 +16,7 @@ describe('Graph - datastructure', () => {
     });
 });
 
-describe('Graph - algorithms', () => {
+describe('Graph - path finding', () => {
     const g = new Graph();
 
     const nodes = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
@@ -109,5 +109,33 @@ describe('Graph - algorithms', () => {
         expect(() => g.findPath('a', 'z')).toThrowError(
             'Could not find source node z',
         );
+    });
+});
+
+describe('Graph - traversing and searching', () => {
+    const graph = new Graph();
+    const nodes = ['a', 'b', 'c', 'd', 'e', 'f'];
+    const edges = [
+        ['a', 'b'],
+        ['a', 'e'],
+        ['a', 'f'],
+        ['b', 'd'],
+        ['b', 'e'],
+        ['c', 'b'],
+        ['d', 'c'],
+        ['d', 'e'],
+    ];
+
+    nodes.map(node => graph.addNode(node));
+    edges.map(nodes => graph.addEdge(nodes[0], nodes[1], 0));
+
+    test('bredth first search', () => {
+        const order = ['a', 'b', 'e', 'f', 'd', 'c'];
+        let i = 0;
+
+        graph.bfs('a', (node: any) => {
+            expect(node.key).toEqual(order[i]);
+            i++;
+        });
     });
 });

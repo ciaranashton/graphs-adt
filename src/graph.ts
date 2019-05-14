@@ -138,4 +138,25 @@ export class Graph {
 
         return buildRoute(destination);
     }
+
+    public bfs(startKey: string, fn: Function) {
+        const visited: Set<string> = new Set();
+        const q: Node[] = [];
+        q.unshift(this.getNode(startKey));
+
+        while (q.length > 0) {
+            const currentNode = q.pop();
+
+            if (!visited.has(currentNode!.key)) {
+                fn(currentNode);
+                visited.add(currentNode!.key);
+            }
+
+            currentNode!.neighbours.forEach(node => {
+                if (!visited.has(node.key)) {
+                    q.unshift(node);
+                }
+            });
+        }
+    }
 }
