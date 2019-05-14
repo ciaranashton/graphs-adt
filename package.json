@@ -1,8 +1,7 @@
 {
     "name": "graphs-adt",
-    "version": "0.1.1",
-    "description":
-        "Graph data structure with path finding and traversing algorithms",
+    "version": "0.1.2",
+    "description": "Graph data structure with path finding and traversing algorithms",
     "keywords": [
         "graph",
         "Graph",
@@ -34,6 +33,10 @@
             "^.+\\.tsx?$": "ts-jest"
         },
         "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(tsx?)$",
-        "moduleFileExtensions": ["js", "ts", "node"]
+        "moduleFileExtensions": [
+            "js",
+            "ts",
+            "node"
+        ]
     }
 }
