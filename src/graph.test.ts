@@ -20,26 +20,24 @@ describe('Graph - path finding', () => {
     const g = new Graph();
 
     const nodes = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
-    const routes = {
-        'a|c': 2,
-        'c|d': 1,
-        'c|f': 4,
-        'b|d': 4,
-        'b|e': 7,
-        'd|f': 1,
-        'd|g': 1,
-        'f|g': 3,
-        'g|h': 4,
-        'e|h': 10,
-    };
+    const routes = [
+        [['a', 'c'], 2],
+        [['c', 'd'], 1],
+        [['c', 'f'], 4],
+        [['b', 'd'], 4],
+        [['b', 'e'], 7],
+        [['d', 'f'], 1],
+        [['d', 'g'], 1],
+        [['f', 'g'], 3],
+        [['g', 'h'], 4],
+        [['e', 'h'], 10],
+    ];
 
     nodes.forEach(node => g.addNode(node));
-    Object.entries(routes).forEach(
-        ([routes, distance]: [string, number]) => {
-            const [start, destination] = routes.split('|');
-            g.addEdge(start, destination, distance);
-        },
-    );
+    routes.forEach(([routes, distance]: any[]) => {
+        const [start, destination] = routes;
+        g.addEdge(start, destination, distance);
+    });
 
     test('dijkstra - a', () => {
         const expectedResults = {
