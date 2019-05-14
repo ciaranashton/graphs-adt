@@ -138,4 +138,14 @@ describe('Graph - traversing and searching', () => {
             i++;
         });
     });
+
+    test('depth first search', () => {
+        const order = ['a', 'b', 'd', 'c', 'e', 'f'];
+        let i = 0;
+
+        graph.dfs('a', (node: any) => {
+            expect(node.key).toEqual(order[i]);
+            i++;
+        });
+    });
 });

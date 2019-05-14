@@ -159,4 +159,21 @@ export class Graph {
             });
         }
     }
+
+    public dfs(startKey: string, fn: Function) {
+        const visited: Set<string> = new Set();
+
+        function explore(node: Node) {
+            if (visited.has(node.key)) return;
+
+            fn(node);
+            visited.add(node.key);
+
+            node.neighbours.forEach(node => {
+                explore(node);
+            });
+        }
+
+        explore(this.getNode(startKey));
+    }
 }
