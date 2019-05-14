@@ -1,8 +1,8 @@
 {
-    "name": "graphco",
+    "name": "graphs-adt",
     "version": "0.1.1",
     "description":
-        "Graph datastructure with path finding and traversing algorithms",
+        "Graph data structure with path finding and traversing algorithms",
     "keywords": [
         "graph",
         "Graph",
