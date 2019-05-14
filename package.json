@@ -1,7 +1,20 @@
 {
-    "name": "graphca",
+    "name": "graphco",
     "version": "0.1.0",
-    "description": "",
+    "description":
+        "Graph datastructure with path finding and traversing algorithms",
+    "keywords": [
+        "graph",
+        "Graph",
+        "dijkstra",
+        "path",
+        "finding",
+        "path finding",
+        "dfs",
+        "depth first search",
+        "bfs",
+        "bredth first search"
+    ],
     "main": "lib/index",
     "typings": "lib/index",
     "scripts": {
@@ -21,10 +34,6 @@
             "^.+\\.tsx?$": "ts-jest"
         },
         "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(tsx?)$",
-        "moduleFileExtensions": [
-            "js",
-            "ts",
-            "node"
-        ]
+        "moduleFileExtensions": ["js", "ts", "node"]
     }
 }
