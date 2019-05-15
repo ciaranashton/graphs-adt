@@ -97,15 +97,15 @@ describe('Graph - path finding', () => {
     expect(result).toEqual(expected);
   });
 
-  test('throw error when given unknown source node', () => {
+  test('unknown source error', () => {
     expect(() => g.findPath('z', 'd')).toThrowError(
-      'Could not find source node z',
+      'Could not find node z',
     );
   });
 
-  test('throw error when given unknown destination node', () => {
+  test('unknown destination error', () => {
     expect(() => g.findPath('a', 'z')).toThrowError(
-      'Could not find source node z',
+      'Could not find node z',
     );
   });
 });

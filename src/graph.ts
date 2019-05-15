@@ -33,7 +33,7 @@ export class Graph {
   public getNode(key: string): Node {
     const node = this.nodes.find(node => node.key === key);
     if (!node) {
-      throw new Error(`Could not find source node ${key}`);
+      throw new Error(`Could not find node ${key}`);
     }
     return node;
   }
@@ -60,7 +60,9 @@ export class Graph {
   ): [string, Result] {
     return Object.entries(dist).reduce(
       (acc: [string, Result], val: [string, Result]): [string, Result] =>
-        val[1].distance < acc[1].distance && !visited.has(val[0]) ? val : acc,
+        val[1].distance < acc[1].distance && !visited.has(val[0])
+          ? val
+          : acc,
       ['', { distance: Infinity, previous: null }],
     );
   }
@@ -105,7 +107,7 @@ export class Graph {
 
   public findPath(source: string, destination: string): string[] {
     if (!this.nodes.find(({ key }) => key === destination)) {
-      throw new Error(`Could not find source node ${destination}`);
+      throw new Error(`Could not find node ${destination}`);
     }
     const results = this.dijkstra(source);
 
