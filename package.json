@@ -1,42 +1,42 @@
 {
-    "name": "graphs-adt",
-    "version": "0.1.2",
-    "description": "Graph data structure with path finding and traversing algorithms",
-    "keywords": [
-        "graph",
-        "Graph",
-        "dijkstra",
-        "path",
-        "finding",
-        "path finding",
-        "dfs",
-        "depth first search",
-        "bfs",
-        "bredth first search"
-    ],
-    "main": "lib/index",
-    "typings": "lib/index",
-    "scripts": {
-        "build": "tsc -p .",
-        "test": "jest --watch"
+  "name": "graphs-adt",
+  "version": "0.1.2",
+  "description": "Graph data structure with path finding and traversing algorithms",
+  "keywords": [
+    "graph",
+    "Graph",
+    "dijkstra",
+    "path",
+    "finding",
+    "path finding",
+    "dfs",
+    "depth first search",
+    "bfs",
+    "bredth first search"
+  ],
+  "main": "lib/index",
+  "typings": "lib/index",
+  "scripts": {
+    "build": "tsc -p .",
+    "test": "jest --watch"
+  },
+  "author": "Ciaran Ashton",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^24.0.12",
+    "jest": "^24.8.0",
+    "ts-jest": "^24.0.2",
+    "typescript": "^3.4.5"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
     },
-    "author": "Ciaran Ashton",
-    "license": "MIT",
-    "devDependencies": {
-        "@types/jest": "^24.0.12",
-        "jest": "^24.8.0",
-        "ts-jest": "^24.0.2",
-        "typescript": "^3.4.5"
-    },
-    "jest": {
-        "transform": {
-            "^.+\\.tsx?$": "ts-jest"
-        },
-        "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(tsx?)$",
-        "moduleFileExtensions": [
-            "js",
-            "ts",
-            "node"
-        ]
-    }
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(tsx?)$",
+    "moduleFileExtensions": [
+      "js",
+      "ts",
+      "node"
+    ]
+  }
 }
