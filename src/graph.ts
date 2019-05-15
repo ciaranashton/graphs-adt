@@ -20,10 +20,12 @@ class Node {
 export class Graph {
   private nodes: Node[];
   private edges: Map<string, number>;
+  private directed: boolean;
 
-  constructor() {
+  constructor(directed = false) {
     this.nodes = [];
     this.edges = new Map();
+    this.directed = directed;
   }
 
   public addNode(key: string): void {
@@ -42,16 +44,26 @@ export class Graph {
     const startNode = this.getNode(key1);
     const endNode = this.getNode(key2);
 
-    const [sort1, sort2] = [key1, key2].sort((a, b) => a.localeCompare(b));
-    this.edges.set(`${sort1}-${sort2}`, weight);
+    if (this.directed) {
+      this.edges.set(`${key1}-${key2}`, weight);
 
-    startNode.addNeighbour(endNode);
-    endNode.addNeighbour(startNode);
+      startNode.addNeighbour(endNode);
+    } else {
+      const [sort1, sort2] = [key1, key2].sort((a, b) => a.localeCompare(b));
+      this.edges.set(`${sort1}-${sort2}`, weight);
+
+      startNode.addNeighbour(endNode);
+      endNode.addNeighbour(startNode);
+    }
   }
 
   public getEdge(key1: string, key2: string): number | undefined {
-    const [sort1, sort2] = [key1, key2].sort((a, b) => a.localeCompare(b));
-    return this.edges.get(`${sort1}-${sort2}`);
+    if (this.directed) {
+      return this.edges.get(`${key1}-${key2}`);
+    } else {
+      const [sort1, sort2] = [key1, key2].sort((a, b) => a.localeCompare(b));
+      return this.edges.get(`${sort1}-${sort2}`);
+    }
   }
 
   private findLowest(
@@ -60,9 +72,7 @@ export class Graph {
   ): [string, Result] {
     return Object.entries(dist).reduce(
       (acc: [string, Result], val: [string, Result]): [string, Result] =>
-        val[1].distance < acc[1].distance && !visited.has(val[0])
-          ? val
-          : acc,
+        val[1].distance < acc[1].distance && !visited.has(val[0]) ? val : acc,
       ['', { distance: Infinity, previous: null }],
     );
   }
