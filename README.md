@@ -5,9 +5,10 @@ This library contains a collection of Graph abstract data types, each with a set
 ## Graphs
 A graph is a structure amounting to a set of objects in which some pairs of the objects are in some sense "related" ([Wikipedia](https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)), 2019).
 
-### Options
-Options when creating a graph
+### Graph
+A directed or undirected graph data structure.
 
+#### Options
  - directed - _default: false_
 
 ```js
@@ -16,9 +17,25 @@ const g = new Graph({
 })
 ```
 
+#### Methods
+ - `g.addNode(key: string)`
+	 - Creates and adds a new node into the graph
+ - `g.getNode(key: string)`
+	 - Returns the requested node
+ - `g.addEdge(key1: string, key2: string, weight: number)`
+	 - Creates a new edge between `key1` and `key2` with the desired `weight`ing. In a directed graph the edge will be directed from `key1` to `key2`
+ - `g.getEdge(key1: string, key2: string)`
+	 - Returns the weighting of the requested edge. If the graph is directed it will return the weighting from `key1` to `key2`. If the graph is undirected the ordering of the node keys doesn't matter.
+ - `g.getPath(key1: string, key2: string)`
+	 - Returns an array of nodes ordered by the shortest path based on the weight of the edges
+ - `g.dijkstra(key: string)`
+	 - Returns an object keyed by all nodes possible to connect to the node represented by `key`. Each node key maps to data representing the distance from `key` and the last traveled
+ - `g.bfs(key: string, fn: Function)`
+	 - Breadth first traversal where `key` is the starting node and `fn` is the callback function to run on each visited node
+ - `g.dfs(key: string, fn: Function)`
+	 - Depth first traversal where `key` is the starting node and `fn` is the callback function to run on each visited node
 
 ### Underdevelopment:
-
  - Graph
 	 - A*
  - Tree
