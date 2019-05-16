@@ -93,7 +93,7 @@ g.dfs('London', node => {
 });
 
 // breadth first search
-g.dfs('London', node => {
+g.bfs('London', node => {
   console.log('Node:', node)
 });
 ```
