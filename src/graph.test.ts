@@ -71,40 +71,40 @@ describe('Graph - path finding', () => {
 
   test('A -> F', () => {
     const expected = ['a', 'c', 'd', 'f'];
-    const result = g.findPath('a', 'f');
+    const result = g.getPath('a', 'f');
 
     expect(result).toEqual(expected);
   });
 
   test('A -> H', () => {
     const expected = ['a', 'c', 'd', 'g', 'h'];
-    const result = g.findPath('a', 'h');
+    const result = g.getPath('a', 'h');
 
     expect(result).toEqual(expected);
   });
 
   test('B -> H', () => {
     const expected = ['b', 'd', 'g', 'h'];
-    const result = g.findPath('b', 'h');
+    const result = g.getPath('b', 'h');
 
     expect(result).toEqual(expected);
   });
 
   test('H -> D', () => {
     const expected = ['h', 'g', 'd'];
-    const result = g.findPath('h', 'd');
+    const result = g.getPath('h', 'd');
 
     expect(result).toEqual(expected);
   });
 
   test('unknown source error', () => {
-    expect(() => g.findPath('z', 'd')).toThrowError(
+    expect(() => g.getPath('z', 'd')).toThrowError(
       'Could not find node z',
     );
   });
 
   test('unknown destination error', () => {
-    expect(() => g.findPath('a', 'z')).toThrowError(
+    expect(() => g.getPath('a', 'z')).toThrowError(
       'Could not find node z',
     );
   });

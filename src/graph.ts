@@ -115,7 +115,7 @@ export class Graph {
     return results;
   }
 
-  public findPath(source: string, destination: string): string[] {
+  public getPath(source: string, destination: string): string[] {
     if (!this.nodes.find(({ key }) => key === destination)) {
       throw new Error(`Could not find node ${destination}`);
     }
