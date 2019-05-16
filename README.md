@@ -12,7 +12,7 @@ Options when creating a graph
 
 ```js
 const g = new Graph({
-	directed: true
+  directed: true
 })
 ```
 
