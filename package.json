@@ -1,6 +1,6 @@
 {
   "name": "graphs-adt",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Graph data structure with path finding and traversing algorithms",
   "repository": {
     "type": "git",
