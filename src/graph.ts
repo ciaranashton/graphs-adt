@@ -22,7 +22,7 @@ export class Graph {
   private edges: Map<string, number>;
   private directed: boolean;
 
-  constructor(directed = false) {
+  constructor({ directed = false }: { directed?: boolean } = {}) {
     this.nodes = [];
     this.edges = new Map();
     this.directed = directed;
