@@ -1,6 +1,6 @@
 {
   "name": "graphs-adt",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Graph data structure with path finding and traversing algorithms",
   "repository": {
     "type": "git",
@@ -8,11 +8,13 @@
   },
   "keywords": [
     "graph",
-    "Graph",
     "dijkstra",
     "path",
     "finding",
-    "path finding",
+    "find path",
+    "path finder",
+    "shortest",
+    "shortest path",
     "dfs",
     "depth first search",
     "bfs",
