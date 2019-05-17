@@ -16,12 +16,12 @@ describe('Graph - datastructure', () => {
   });
 });
 
-describe('Graph - path finding', () => {
+describe('Graph - path finding (undirected)', () => {
   const g = new Graph();
 
   const nodes = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
   const routes = [
-    [['a', 'c'], 2],
+    [['c', 'a'], 2],
     [['c', 'd'], 1],
     [['c', 'f'], 4],
     [['b', 'd'], 4],
@@ -98,15 +98,103 @@ describe('Graph - path finding', () => {
   });
 
   test('unknown source error', () => {
-    expect(() => g.getPath('z', 'd')).toThrowError(
-      'Could not find node z',
-    );
+    expect(() => g.getPath('z', 'd')).toThrowError('Could not find node z');
   });
 
   test('unknown destination error', () => {
-    expect(() => g.getPath('a', 'z')).toThrowError(
-      'Could not find node z',
-    );
+    expect(() => g.getPath('a', 'z')).toThrowError('Could not find node z');
+  });
+});
+
+describe('Graph - path finding (directed)', () => {
+  const g = new Graph({
+    directed: true,
+  });
+
+  const nodes = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+  const routes = [
+    [['a', 'c'], 2],
+    [['c', 'd'], 1],
+    [['c', 'f'], 4],
+    [['b', 'd'], 4],
+    [['b', 'e'], 7],
+    [['d', 'f'], 1],
+    [['d', 'g'], 1],
+    [['f', 'g'], 3],
+    [['g', 'h'], 4],
+    [['e', 'h'], 10],
+  ];
+
+  nodes.forEach(node => g.addNode(node));
+  routes.forEach(([routes, distance]: any[]) => {
+    const [start, destination] = routes;
+    g.addEdge(start, destination, distance);
+  });
+
+  test('dijkstra - a', () => {
+    const expectedResults = {
+      a: { distance: 0, previous: null },
+      b: { distance: Infinity, previous: null },
+      c: { distance: 2, previous: 'a' },
+      d: { distance: 3, previous: 'c' },
+      e: { distance: Infinity, previous: null },
+      f: { distance: 4, previous: 'd' },
+      g: { distance: 4, previous: 'd' },
+      h: { distance: 8, previous: 'g' },
+    };
+
+    expect(g.dijkstra('a')).toEqual(expectedResults);
+  });
+
+  test('dijkstra - e', () => {
+    const expectedResults = {
+      a: { distance: Infinity, previous: null },
+      b: { distance: Infinity, previous: null },
+      c: { distance: Infinity, previous: null },
+      d: { distance: Infinity, previous: null },
+      e: { distance: 0, previous: null },
+      f: { distance: Infinity, previous: null },
+      g: { distance: Infinity, previous: null },
+      h: { distance: 10, previous: 'e' },
+    };
+
+    expect(g.dijkstra('e')).toEqual(expectedResults);
+  });
+
+  test('A -> F', () => {
+    const expected = ['a', 'c', 'd', 'f'];
+    const result = g.getPath('a', 'f');
+
+    expect(result).toEqual(expected);
+  });
+
+  test('A -> H', () => {
+    const expected = ['a', 'c', 'd', 'g', 'h'];
+    const result = g.getPath('a', 'h');
+
+    expect(result).toEqual(expected);
+  });
+
+  test('B -> H', () => {
+    const expected = ['b', 'd', 'g', 'h'];
+    const result = g.getPath('b', 'h');
+
+    expect(result).toEqual(expected);
+  });
+
+  test('H -> D', () => {
+    const expected: string[] = [];
+    const result = g.getPath('h', 'd');
+
+    expect(result).toEqual(expected);
+  });
+
+  test('unknown source error', () => {
+    expect(() => g.getPath('z', 'd')).toThrowError('Could not find node z');
+  });
+
+  test('unknown destination error', () => {
+    expect(() => g.getPath('a', 'z')).toThrowError('Could not find node z');
   });
 });
 

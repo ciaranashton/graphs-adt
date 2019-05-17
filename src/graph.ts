@@ -58,12 +58,10 @@ export class Graph {
   }
 
   public getEdge(key1: string, key2: string): number | undefined {
-    if (this.directed) {
-      return this.edges.get(`${key1}-${key2}`);
-    } else {
-      const [sort1, sort2] = [key1, key2].sort((a, b) => a.localeCompare(b));
-      return this.edges.get(`${sort1}-${sort2}`);
-    }
+    if (this.directed) return this.edges.get(`${key1}-${key2}`);
+
+    const [sort1, sort2] = [key1, key2].sort((a, b) => a.localeCompare(b));
+    return this.edges.get(`${sort1}-${sort2}`);
   }
 
   private findLowest(
@@ -73,7 +71,7 @@ export class Graph {
     return Object.entries(dist).reduce(
       (acc: [string, Result], val: [string, Result]): [string, Result] =>
         val[1].distance < acc[1].distance && !visited.has(val[0]) ? val : acc,
-      ['', { distance: Infinity, previous: null }],
+      ['none', { distance: Infinity, previous: null }],
     );
   }
 
@@ -94,6 +92,7 @@ export class Graph {
 
     while (visited.size < this.nodes.length) {
       const [lowestKey] = this.findLowest(results, visited);
+      if (lowestKey === 'none') return results;
       visited.add(lowestKey);
 
       const node = this.getNode(lowestKey);
@@ -120,6 +119,7 @@ export class Graph {
       throw new Error(`Could not find node ${destination}`);
     }
     const results = this.dijkstra(source);
+    if (results[destination].distance === Infinity) return [];
 
     function buildRoute(key: string, route: string[] = []): string[] {
       const { previous } = results[key];
