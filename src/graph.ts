@@ -71,28 +71,27 @@ export class Graph {
     return Object.entries(dist).reduce(
       (acc: [string, Result], val: [string, Result]): [string, Result] =>
         val[1].distance < acc[1].distance && !visited.has(val[0]) ? val : acc,
-      ['none', { distance: Infinity, previous: null }],
+      ['', { distance: Infinity, previous: null }],
     );
   }
 
   public dijkstra(source: string) {
-    const results: { [key: string]: Result } = {};
     const visited: Set<string> = new Set();
 
-    this.nodes.forEach(({ key }) => {
-      results[key] = {
-        distance: Infinity,
-        previous: null,
-      };
-    });
-    results[source] = {
-      distance: 0,
-      previous: null,
-    };
+    const results: { [key: string]: Result } = this.nodes.reduce(
+      (acc, { key }): { [key: string]: Result } => ({
+        ...acc,
+        [key]: {
+          distance: key === source ? 0 : Infinity,
+          previous: null,
+        },
+      }),
+      {},
+    );
 
     while (visited.size < this.nodes.length) {
-      const [lowestKey] = this.findLowest(results, visited);
-      if (lowestKey === 'none') return results;
+      const [lowestKey, { distance }] = this.findLowest(results, visited);
+      if (distance === Infinity) return results;
       visited.add(lowestKey);
 
       const node = this.getNode(lowestKey);
@@ -115,9 +114,8 @@ export class Graph {
   }
 
   public getPath(source: string, destination: string): string[] {
-    if (!this.nodes.find(({ key }) => key === destination)) {
-      throw new Error(`Could not find node ${destination}`);
-    }
+    this.getNode(source)
+    this.getNode(destination)
     const results = this.dijkstra(source);
     if (results[destination].distance === Infinity) return [];
 
