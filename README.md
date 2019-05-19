@@ -1,4 +1,5 @@
 # Graphs - Abstract Data Type
+[![CircleCI](https://circleci.com/gh/ciaranashton/graphs-adt/tree/master.svg?style=shield)](https://circleci.com/gh/ciaranashton/graphs-adt/tree/master)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fciaranashton%2Fgraphs-adt.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fciaranashton%2Fgraphs-adt?ref=badge_shield)
 
 
