@@ -65,10 +65,10 @@ export class Graph {
   }
 
   private findLowest(
-    dist: { [key: string]: Result },
+    results: { [key: string]: Result },
     visited: Set<string>,
   ): [string, Result] {
-    return Object.entries(dist).reduce(
+    return Object.entries(results).reduce(
       (acc: [string, Result], val: [string, Result]): [string, Result] =>
         val[1].distance < acc[1].distance && !visited.has(val[0]) ? val : acc,
       ['', { distance: Infinity, previous: null }],
@@ -78,8 +78,9 @@ export class Graph {
   public dijkstra(source: string) {
     const visited: Set<string> = new Set();
 
-    const results: { [key: string]: Result } = this.nodes.reduce(
-      (acc, { key }): { [key: string]: Result } => ({
+    type Results = { [key: string]: Result };
+    const results: Results = this.nodes.reduce(
+      (acc, { key }): Results => ({
         ...acc,
         [key]: {
           distance: key === source ? 0 : Infinity,
@@ -114,8 +115,8 @@ export class Graph {
   }
 
   public getPath(source: string, destination: string): string[] {
-    this.getNode(source)
-    this.getNode(destination)
+    this.getNode(source);
+    this.getNode(destination);
     const results = this.dijkstra(source);
     if (results[destination].distance === Infinity) return [];
 
