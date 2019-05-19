@@ -1,4 +1,6 @@
 # Graphs - Abstract Data Type
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fciaranashton%2Fgraphs-adt.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fciaranashton%2Fgraphs-adt?ref=badge_shield)
+
 
 This library contains a collection of Graph abstract data types, each with a set of algorithms. 
 
@@ -114,3 +116,6 @@ g.bfs('London', node => {
   console.log('Node:', node)
 });
 ```
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fciaranashton%2Fgraphs-adt.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fciaranashton%2Fgraphs-adt?ref=badge_large)
