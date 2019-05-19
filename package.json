@@ -24,7 +24,7 @@
   "typings": "lib/index",
   "scripts": {
     "build": "tsc -p .",
-    "test": "jest --watch"
+    "test": "jest"
   },
   "author": "Ciaran Ashton",
   "license": "MIT",
